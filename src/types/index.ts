@@ -19,6 +19,12 @@ export type FeedPayload = {
 
 export type ChainlinkPriceFeedApiResponse = {
   "ethereum-addresses": FeedPayload;
+  "binance-smart-chain-addresses-price": FeedPayload;
+  "matic-addresses": FeedPayload;
+  "avalanche-price-feeds": FeedPayload;
+  "fantom-price-feeds": FeedPayload;
+  "arbitrum-price-feeds": FeedPayload;
+  "data-feeds-moonriver": FeedPayload;
 };
 
 export type EthereumNetworkType = "Mainnet" | "Kovan" | "Rinkeby";
