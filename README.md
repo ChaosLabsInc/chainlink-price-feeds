@@ -12,4 +12,4 @@ A simple package for fetching Chainlink price feeds for various networks. This p
 
 ## Installation
 
-`npm i chainlink-price-feeds`
+`npm i @chaos-labs/chainlink-price-feeds`
