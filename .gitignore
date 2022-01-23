@@ -1,0 +1,36 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/docs/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+/deployment/temp
+
+# production
+#/build
+
+#compiler
+/src/compiler/solidity/artifacts/*
+/src/compiler/solidity/typechain/*
+/src/compiler/solidity/cache/*
+/src/compiler/solidity/abi/*
+
+#logs
+/logs/*
+!/logs/.gitkeep
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,32 @@
+{
+  "name": "chainlink-price-feeds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "node ./build/index.js",
+    "build": "npx tsc -d",
+    "test": "jest build",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test"
+  },
+  "author": "Omer Goldberg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChaosLabsInc/data-fetchers/issues"
+  },
+  "homepage": "https://github.com/ChaosLabsInc/data-fetchers#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "ethers": "^5.5.2",
+    "graphql": "^16.1.0",
+    "graphql-request": "^3.7.0",
+    "node-fetch": "^2.6.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.3",
+    "ts-jest": "^27.1.0",
+    "typescript": "^4.5.2"
+  }
+}
