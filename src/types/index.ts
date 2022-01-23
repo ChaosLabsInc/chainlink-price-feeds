@@ -6,17 +6,19 @@ export type Proxy = {
   proxy: string;
 };
 
-export type EthereumNetwork = {
+export type Network = {
   name: string;
   url: string;
   proxies: Array<Proxy>;
 };
 
+export type FeedPayload = {
+  title: string;
+  networks: Array<Network>;
+};
+
 export type ChainlinkPriceFeedApiResponse = {
-  "ethereum-addresses": {
-    title: string;
-    networks: Array<EthereumNetwork>;
-  };
+  "ethereum-addresses": FeedPayload;
 };
 
 export type EthereumNetworkType = "Mainnet" | "Kovan" | "Rinkeby";

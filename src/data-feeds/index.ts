@@ -10,22 +10,24 @@ const CHAINLINK_DOCS_CONSTANTS = {
     RINKEBY: "Rinkeby Testnet",
   },
   PAYLOAD_KEYS: {
+    AVALANCHE: "avalanche-price-feeds",
     ARBITRUM: "arbitrum-price-feeds",
     ETHEREUM: "ethereum-addresses",
     BSC: "binance-smart-chain-addresses-price",
     FANTOM: "fantom-price-feeds",
     MATIC: "matic-addresses",
-    SOLANA: "solana-price-feeds",
+    MOON_RIVER: "data-feeds-moonriver",
   },
 };
 
 const SUPPORTED_NETWORKS = {
   ETHEREUM: "ethereum",
+  AVALANCHE: "avalanche",
+  MOON_RIVER: "moon_river",
   ARBITRUM: "arbitrum",
   BSC: "bsc",
   FANTOM: "fantom",
   MATIC: "matic",
-  SOLANA: "solana",
 };
 
 const mapNetworkToChainlinkIdentifiers = (network: string) => {
@@ -40,14 +42,17 @@ const mapNetworkToChainlinkIdentifiers = (network: string) => {
       return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.FANTOM;
     case SUPPORTED_NETWORKS.MATIC:
       return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.MATIC;
-    case SUPPORTED_NETWORKS.SOLANA:
-      return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.SOLANA;
+    case SUPPORTED_NETWORKS.AVALANCHE:
+      return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.AVALANCHE;
+    case SUPPORTED_NETWORKS.MOON_RIVER:
+      return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.MOON_RIVER;
     default:
       throw new Error(`Unsupported network: ${network} `);
   }
 };
 
 export = {
+  SUPPORTED_NETWORKS,
   getPriceFeedsForNetwork: async function getAllPriceFeeds(network: string) {
     try {
       if (!network || !(typeof network === "string")) {
@@ -62,7 +67,7 @@ export = {
       throw new Error(`Failed to fetch ${network} price feeds...[${e}]`);
     }
   },
-  getProxiesForNetwork: async function getEthereumProxiesForNetwork(network) {
+  getProxiesForNetwork: async function getProxiesForNetwork(network: string) {
     try {
       if (!network || !(typeof network === "string")) {
         throw new Error(`Please provide a network type, received ${network}`);
