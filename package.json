@@ -1,6 +1,6 @@
 {
   "name": "chainlink-price-feeds",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "build/index.js",
   "scripts": {
@@ -13,9 +13,9 @@
   "author": "Omer Goldberg",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ChaosLabsInc/data-fetchers/issues"
+    "url": "https://github.com/ChaosLabsInc/chainlink-price-feeds/issues"
   },
-  "homepage": "https://github.com/ChaosLabsInc/data-fetchers#readme",
+  "homepage": "https://github.com/ChaosLabsInc/chainlink-price-feeds#readme",
   "dependencies": {
     "axios": "^0.24.0",
     "ethers": "^5.5.2",
