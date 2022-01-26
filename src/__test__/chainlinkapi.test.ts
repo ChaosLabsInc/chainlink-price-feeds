@@ -1,10 +1,20 @@
 import DataFeedObj from "../data-feeds";
-import { FeedPayload } from "../types";
-const { SUPPORTED_NETWORKS, getPriceFeedsForNetwork } = DataFeedObj;
+import { FeedPayload, Proxy } from "../types";
+const {
+  CHAINLINK_DOCS_CONSTANTS,
+  SUPPORTED_NETWORKS,
+  SUPPORTED_CHAINS,
+  getPriceFeedsForNetwork,
+  getProxiesForNetwork,
+} = DataFeedObj;
 jest.setTimeout(30000);
 
+/**
+ * PRICE FEEDS FOR NETWORKS
+ */
+
 test("Ethereum Data Feeds", async () => {
-  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_NETWORKS.ETHEREUM);
+  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_CHAINS.ETHEREUM);
   expect(priceFeeds).toBeDefined();
   const { title, networks } = priceFeeds;
   expect(title).toBeDefined();
@@ -13,7 +23,7 @@ test("Ethereum Data Feeds", async () => {
 });
 
 test("Arbitrum Data Feeds", async () => {
-  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_NETWORKS.ARBITRUM);
+  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_CHAINS.ARBITRUM);
   expect(priceFeeds).toBeDefined();
   const { title, networks } = priceFeeds;
   expect(title).toBeDefined();
@@ -22,7 +32,7 @@ test("Arbitrum Data Feeds", async () => {
 });
 
 test("BSC Data Feeds", async () => {
-  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_NETWORKS.BSC);
+  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_CHAINS.BSC);
   expect(priceFeeds).toBeDefined();
   const { title, networks } = priceFeeds;
   expect(title).toBeDefined();
@@ -31,7 +41,7 @@ test("BSC Data Feeds", async () => {
 });
 
 test("Fantom Data Feeds", async () => {
-  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_NETWORKS.FANTOM);
+  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_CHAINS.FANTOM);
   expect(priceFeeds).toBeDefined();
   const { title, networks } = priceFeeds;
   expect(title).toBeDefined();
@@ -40,7 +50,7 @@ test("Fantom Data Feeds", async () => {
 });
 
 test("Matic Data Feeds", async () => {
-  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_NETWORKS.MATIC);
+  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_CHAINS.MATIC);
   expect(priceFeeds).toBeDefined();
   const { title, networks } = priceFeeds;
   expect(title).toBeDefined();
@@ -49,7 +59,7 @@ test("Matic Data Feeds", async () => {
 });
 
 test("Avalanche Data Feeds", async () => {
-  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_NETWORKS.AVALANCHE);
+  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_CHAINS.AVALANCHE);
   expect(priceFeeds).toBeDefined();
   const { title, networks } = priceFeeds;
   expect(title).toBeDefined();
@@ -58,7 +68,7 @@ test("Avalanche Data Feeds", async () => {
 });
 
 test("MoonRiver Data Feeds", async () => {
-  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_NETWORKS.MOON_RIVER);
+  const priceFeeds: FeedPayload = await getPriceFeedsForNetwork(SUPPORTED_CHAINS.MOON_RIVER);
   expect(priceFeeds).toBeDefined();
   const { title, networks } = priceFeeds;
   expect(title).toBeDefined();
@@ -78,4 +88,107 @@ test("Unsupported Data Feeds", async () => {
     let err = e as Error;
     expect(err.message).toContain("Unsupported network");
   }
+});
+
+/**
+ * PROXIES FOR NETWORKS
+ */
+
+test("Ethereum Mainnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.ETHEREUM,
+    SUPPORTED_NETWORKS.ETHEREUM_MAINNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("Ethereum Kovan Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.ETHEREUM,
+    SUPPORTED_NETWORKS.ETHEREUM_KOVAN
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("Ethereum Rinkeby Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.ETHEREUM,
+    SUPPORTED_NETWORKS.ETHEREUM_KOVAN
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("BSC Mainnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.BSC,
+    SUPPORTED_NETWORKS.BSC_MAINNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("BSC Testnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.BSC,
+    SUPPORTED_NETWORKS.BSC_TESTNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("Polygon Mainnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.MATIC,
+    SUPPORTED_NETWORKS.POLYGON_MAINNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("Polygon Testnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.MATIC,
+    SUPPORTED_NETWORKS.POLYGON_TESTNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("Avalanche Mainnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.AVALANCHE,
+    SUPPORTED_NETWORKS.AVALANCHE_MAINNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("Avalanche Testnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.AVALANCHE,
+    SUPPORTED_NETWORKS.AVALANCHE_TESTNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("Fantom Mainnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.FANTOM,
+    SUPPORTED_NETWORKS.FANTOM_MAINNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
+});
+
+test("Fantom Testnet Proxies", async () => {
+  const proxies: Array<Proxy> = await getProxiesForNetwork(
+    CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.FANTOM,
+    SUPPORTED_NETWORKS.FANTOM_TESTNET
+  );
+  expect(proxies).toBeDefined();
+  expect(proxies.length).toBeGreaterThanOrEqual(0);
 });

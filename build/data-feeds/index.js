@@ -29,7 +29,7 @@ const CHAINLINK_DOCS_CONSTANTS = {
         MOON_RIVER: "data-feeds-moonriver",
     },
 };
-const SUPPORTED_NETWORKS = {
+const SUPPORTED_CHAINS = {
     ETHEREUM: "ethereum",
     AVALANCHE: "avalanche",
     MOON_RIVER: "moon_river",
@@ -38,28 +38,43 @@ const SUPPORTED_NETWORKS = {
     FANTOM: "fantom",
     MATIC: "matic",
 };
+const SUPPORTED_NETWORKS = {
+    ETHEREUM_MAINNET: "Ethereum Mainnet",
+    ETHEREUM_KOVAN: "Kovan Testnet",
+    ETHEREUM_RINKEBY: "Rinkeby Testnet",
+    BSC_MAINNET: "BSC Mainnet",
+    BSC_TESTNET: "BSC Testnet",
+    POLYGON_MAINNET: "Polygon Mainnet",
+    POLYGON_TESTNET: "Mumbai Testnet",
+    AVALANCHE_MAINNET: "Avalanche Mainnet",
+    AVALANCHE_TESTNET: "Avalanche Testnet",
+    FANTOM_MAINNET: "Fantom Mainnet",
+    FANTOM_TESTNET: "Fantom Testnet",
+};
 const mapNetworkToChainlinkIdentifiers = (network) => {
     switch (network) {
-        case SUPPORTED_NETWORKS.ETHEREUM:
+        case SUPPORTED_CHAINS.ETHEREUM:
             return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.ETHEREUM;
-        case SUPPORTED_NETWORKS.ARBITRUM:
+        case SUPPORTED_CHAINS.ARBITRUM:
             return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.ARBITRUM;
-        case SUPPORTED_NETWORKS.BSC:
+        case SUPPORTED_CHAINS.BSC:
             return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.BSC;
-        case SUPPORTED_NETWORKS.FANTOM:
+        case SUPPORTED_CHAINS.FANTOM:
             return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.FANTOM;
-        case SUPPORTED_NETWORKS.MATIC:
+        case SUPPORTED_CHAINS.MATIC:
             return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.MATIC;
-        case SUPPORTED_NETWORKS.AVALANCHE:
+        case SUPPORTED_CHAINS.AVALANCHE:
             return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.AVALANCHE;
-        case SUPPORTED_NETWORKS.MOON_RIVER:
+        case SUPPORTED_CHAINS.MOON_RIVER:
             return CHAINLINK_DOCS_CONSTANTS.PAYLOAD_KEYS.MOON_RIVER;
         default:
             throw new Error(`Unsupported network: ${network} `);
     }
 };
 module.exports = {
+    CHAINLINK_DOCS_CONSTANTS,
     SUPPORTED_NETWORKS,
+    SUPPORTED_CHAINS,
     getPriceFeedsForNetwork: function getAllPriceFeeds(network) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -77,17 +92,18 @@ module.exports = {
             }
         });
     },
-    getProxiesForNetwork: function getProxiesForNetwork(network) {
+    getProxiesForNetwork: function getProxiesForNetwork(blockchain, network) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (!network || !(typeof network === "string")) {
-                    throw new Error(`Please provide a network type, received ${network}`);
+                if (!network || !(typeof network === "string") || !blockchain || !(typeof blockchain === "string")) {
+                    throw new Error(`Please provide a blockchain and network type, received ${blockchain} and network ${network}`);
                 }
-                const urlForNetwork = mapNetworkToChainlinkIdentifiers(network);
                 const priceFeedPayload = yield axios_1.default.get(CHAINLINK_DOCS_CONSTANTS.ADDRESSES_ENDPOINT);
                 const priceFeedData = priceFeedPayload.data;
-                const etherumPriceFeeds = priceFeedData[urlForNetwork];
-                const foundNetwork = etherumPriceFeeds.networks.find((n) => n.name === network);
+                const priceFeeds = priceFeedData[blockchain];
+                const foundNetwork = priceFeeds.networks.find((n) => {
+                    return n.name === network;
+                });
                 if (foundNetwork === undefined) {
                     throw new Error(`Could not find ${network} while searching networks`);
                 }
