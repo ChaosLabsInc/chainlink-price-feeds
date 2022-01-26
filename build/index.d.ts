@@ -1,4 +1,30 @@
 declare const _default: {
+    CHAINLINK_DOCS_CONSTANTS: {
+        ADDRESSES_ENDPOINT: string;
+        ETHEREUM_NETWORKS: {
+            MAINNET: string;
+            KOVAN: string;
+            RINKEBY: string;
+        };
+        PAYLOAD_KEYS: {
+            AVALANCHE: string;
+            ARBITRUM: string;
+            ETHEREUM: string;
+            BSC: string;
+            FANTOM: string;
+            MATIC: string;
+            MOON_RIVER: string;
+        };
+    };
+    SUPPORTED_CHAINS: {
+        ETHEREUM: string;
+        AVALANCHE: string;
+        MOON_RIVER: string;
+        ARBITRUM: string;
+        BSC: string;
+        FANTOM: string;
+        MATIC: string;
+    };
     SUPPORTED_NETWORKS: {
         ETHEREUM_MAINNET: string;
         ETHEREUM_KOVAN: string;
