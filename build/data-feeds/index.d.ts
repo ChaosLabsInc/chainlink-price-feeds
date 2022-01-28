@@ -1,3 +1,4 @@
+import type { Proxy, FeedPayload } from "../types";
 declare const _default: {
     CHAINLINK_DOCS_CONSTANTS: {
         ADDRESSES_ENDPOINT: string;
@@ -38,7 +39,7 @@ declare const _default: {
         FANTOM: string;
         MATIC: string;
     };
-    getPriceFeedsForNetwork: (network: string) => Promise<any>;
-    getProxiesForNetwork: (blockchain: string, network: string) => Promise<any>;
+    getPriceFeedsForNetwork: (network: string) => Promise<FeedPayload>;
+    getProxiesForNetwork: (blockchain: string, network: string) => Promise<Array<Proxy>>;
 };
 export = _default;

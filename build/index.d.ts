@@ -38,7 +38,7 @@ declare const _default: {
         FANTOM_MAINNET: string;
         FANTOM_TESTNET: string;
     };
-    getPriceFeedsForNetwork: (network: string) => Promise<any>;
-    getProxiesForNetwork: (blockchain: string, network: string) => Promise<any>;
+    getPriceFeedsForNetwork: (network: string) => Promise<import("./types").FeedPayload>;
+    getProxiesForNetwork: (blockchain: string, network: string) => Promise<import("./types").Proxy[]>;
 };
 export = _default;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import type { ChainlinkPriceFeedApiResponse } from "../types";
+import type { ChainlinkPriceFeedApiResponse, Proxy, FeedPayload } from "../types";
 
 const CHAINLINK_DOCS_CONSTANTS = {
   ADDRESSES_ENDPOINT: "https://cl-docs-addresses.web.app/addresses.json",
@@ -69,7 +69,7 @@ export = {
   CHAINLINK_DOCS_CONSTANTS,
   SUPPORTED_NETWORKS,
   SUPPORTED_CHAINS,
-  getPriceFeedsForNetwork: async function getAllPriceFeeds(network: string) {
+  getPriceFeedsForNetwork: async function getAllPriceFeeds(network: string): Promise<FeedPayload> {
     try {
       if (!network || !(typeof network === "string")) {
         throw new Error(`Please provide a network type, received ${network}`);
@@ -83,7 +83,10 @@ export = {
       throw new Error(`Failed to fetch ${network} price feeds...[${e}]`);
     }
   },
-  getProxiesForNetwork: async function getProxiesForNetwork(blockchain: string, network: string) {
+  getProxiesForNetwork: async function getProxiesForNetwork(
+    blockchain: string,
+    network: string
+  ): Promise<Array<Proxy>> {
     try {
       if (!network || !(typeof network === "string") || !blockchain || !(typeof blockchain === "string")) {
         throw new Error(`Please provide a blockchain and network type, received ${blockchain} and network ${network}`);
